@@ -1,6 +1,8 @@
 Android Week View
 =================
 
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/Android-Week-View/Lobby)
+
 **Android Week View** is an android library to display calendars (week view or day view) within the app. It supports custom styling.
 
 ![](images/screen-shot.png)
@@ -31,14 +33,14 @@ Usage
     <dependency>
       <groupId>com.github.alamkanak</groupId>
       <artifactId>android-week-view</artifactId>
-      <version>1.2.3</version>
+      <version>1.2.6</version>
       <type>aar</type>
     </dependency>
     ```
   * Grab via gradle
   
     ```groovy
-    compile 'com.github.alamkanak:android-week-view:1.2.3'
+    compile 'com.github.alamkanak:android-week-view:1.2.6'
     ```
 2. Add WeekView in your xml layout.
 
@@ -81,7 +83,7 @@ Usage
 5. Provide the events for the `WeekView` in `WeekView.MonthChangeListener.onMonthChange()` callback. Please remember that the calendar pre-loads events of three consecutive months to enable lag-free scrolling.
 
     ```java
-    WeekView.MonthChangeListener mMonthChangeListener = new WeekView.MonthChangeListener() {
+    MonthLoader.MonthChangeListener mMonthChangeListener = new MonthLoader.MonthChangeListener() {
         @Override
         public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
             // Populate the week view with some events.
@@ -96,6 +98,7 @@ Customization
 
 You can customize the look of the `WeekView` in xml. Use the following attributes in xml. All these attributes also have getters and setters to enable you to change the style dynamically.
 
+- `allDayEventHeight`
 - `columnGap`
 - `dayBackgroundColor`
 - `dayNameLength`
@@ -117,13 +120,24 @@ You can customize the look of the `WeekView` in xml. Use the following attribute
 - `textSize`
 - `todayBackgroundColor`
 - `todayHeaderTextColor`
+- `showDistinctPastFutureColor`
+- `futureBackgroundColor`
+- `pastBackgroundColor`
+- `showDistinctWeekendColor`
+- `futureWeekendBackgroundColor`
+- `pastWeekendBackgroundColor`
+- `showNowLine`
+- `nowLineColor`
+- `nowLineThickness`
+- `scrollDuration`
 
 Interfaces
 ----------
 
 Use the following interfaces according to your need.
 
-- `mWeekView.setMonthChangeListener()` to provide events to the calendar
+- `mWeekView.setWeekViewLoader()` to provide events to the calendar
+- `mWeekView.setMonthChangeListener()` to provide events to the calendar by months
 - `mWeekView.setOnEventClickListener()` to get a callback when an event is clicked
 - `mWeekView.setEventLongPressListener()` to get a callback when an event is long pressed
 - `mWeekView.setEmptyViewClickListener()` to get a callback when any empty space is clicked
@@ -144,6 +158,29 @@ To do
 
 Changelog
 ---------
+
+**Version 1.2.6**
+
+* Add empty view click listener
+* Fix padding bug
+* Fix bug when setting colors of different components
+* Add ability to turn off fling gesture
+* Add example of how to load events asynchronously in the sample app
+
+**Version 1.2.5**
+
+* Add support for using subclasses of `WeekViewEvent`
+* Fix scroll animation
+* Add support for semi-transparent header colors
+
+**Version 1.2.4**
+
+* **NOTE:** If you are using `WeekView.MonthChangeListener`, make sure to change it into `MonthLoader.MonthChangeListener`
+* Add support to have loaders other than MonthViewLoader
+* Add pinch to zoom support
+* Add support for location
+* Add ability to have different colors for past, future, weekend days
+* Add support for "now" line
 
 **Version 1.2.3**
 
